@@ -33,4 +33,9 @@ public class Board {//tabuleiro não vai retornar a classe inteira, somente uma 
     public Piece piece(Position position) { //sobrecarga do método anterior
         return pieces[position.getRow()][position.getColumn()];
     }
+
+    public void placePiece(Piece piece, Position position) {//vai na matriz de peças do meu tabuleiro
+        pieces[position.getRow()][position.getColumn()] = piece; //nestas linhas e colunas (posição dada) e atribui a elas, a peça que eu informei
+        piece.position = position; //a posição da oeça não é mais nula, ela é acessível diretamente pois ela é proteced (a classe Board é do mesmo pacote que a classe Piece)
+    }
 }
