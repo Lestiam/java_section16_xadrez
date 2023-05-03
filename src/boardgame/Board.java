@@ -46,6 +46,19 @@ public class Board {//tabuleiro não vai retornar a classe inteira, somente uma 
         piece.position = position; //a posição da oeça não é mais nula, ela é acessível diretamente pois ela é proteced (a classe Board é do mesmo pacote que a classe Piece)
     }
 
+    public Piece removePiece(Position position) {//remove as peças do tabuleiro
+        if(!positionExists(position)) {
+            throw new BoardException("Position not on the board");
+        }
+        if (piece(position) == null) { //testo se a peça no tabuleiro nesta posição é = a nulo
+            return null;
+        }
+        Piece aux = piece(position); //variavel auxiliar que recebe a peça que está no tabuleiro nesta posição
+        aux.position = null; //agora retiro a peça do tabuleiro, atribuindo a peça a posição nula
+        pieces[position.getRow()][position.getColumn()] = null; //falo que a minha matriz de peças nesta linha e nesta coluna recebe nulo, ou seja, removi a peça
+        return aux; //retorna na variavel aux a peça que foi removida
+    }
+
     private boolean positionExists(int row, int column) { //método auxiliar para o método abaixo, vai ter um momento que vai ser mais facil testar pela linha e pela coluna do que pela posição
         return row >= 0 && row < rows && column >= 0 && column < columns; //a condição para "quando uma posição em uma determinada linha e uma determinada coluna existe..."
         //rows - altura do tabuleiro / comuns - largura do tabuleiro

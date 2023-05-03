@@ -1,6 +1,7 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
@@ -24,6 +25,27 @@ public class ChessMatch {//partida de xadrez, é o coração do sistema de xadre
         return mat; //retorna a matriz de peças da minha partida de xadrez
         //vou percorrer a matriz de peças do board e para cada peça do meu tabuleiro, eu vou fazer um
         //downcasting para chessPiece
+    }
+
+    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+        Position source = sourcePosition.toPosition(); //primeiro converto estas duas posições para posições da matriz
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source); //esta operação é responsável por validar esta posição de origem, caso ela não exista, esta operação vai lancar uma excessão
+        Piece capturedPiece = makeMove(source, target); //esta variavel recebe o resultado da operação makeMove que realize o movimento da peça
+        return (ChessPiece) capturedPiece; //retorno minha peça capturada, fazendo um downcasting para ChessPiece pois a peça capturada é do tipo Piece
+    }
+
+    private Piece makeMove(Position source, Position target) { //recebe uma posição de origem e uma de destino
+        Piece p = board.removePiece(source); //retirei a peça da posição de origem
+        Piece capturedPiece = board.removePiece(target); //removo a possível peça que esteja na posição de destino e ela por padrão, será a peça capturada
+        board.placePiece(p, target); //coloco a peça que estava na posição de origem, no lugar da peça que estava na posição de destino
+        return capturedPiece;
+    }
+
+    private void validateSourcePosition(Position position) {
+        if (!board.theIsAPiece(position)) { //neguei o thereIsAPiece, ou seja, se não existir uma peça nesta posição, eu dou uma excessão
+            throw  new ChessException("There is no piece on source position"); //a minha ChessException também é uma BoardException
+        }
     }
 
     private void placeNewPiece(char column, int row, ChessPiece piece) {//recebe as coordenadas do xadrez
