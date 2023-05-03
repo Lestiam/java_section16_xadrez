@@ -33,8 +33,18 @@ public class ChessMatch {//partida de xadrez, é o coração do sistema de xadre
     private void initialSetup() {
         //board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1)); //o Position é la da camada de board, não da camada de xadrez
         //era assim antes, agora eu vou passar a posição do xadrez:
-        placeNewPiece('b', 6, new Rook(board, Color.WHITE));
-        placeNewPiece('e', 8, new King(board, Color.BLACK));
-        placeNewPiece('e', 1, new King(board, Color.WHITE));
+        placeNewPiece('c', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('c', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('d', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 2, new Rook(board, Color.WHITE));
+        placeNewPiece('e', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('d', 1, new King(board, Color.WHITE));
+
+        placeNewPiece('c', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('c', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('d', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('e', 7, new Rook(board, Color.BLACK));
+        placeNewPiece('e', 8, new Rook(board, Color.BLACK));
+        placeNewPiece('d', 8, new King(board, Color.BLACK));
     }
 }
