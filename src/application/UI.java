@@ -32,6 +32,11 @@ public class UI { //User Interface
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+    public static void clearScreen() { //método para limpar a tela depois de cada jogada
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static ChessPosition readChessPosition(Scanner sc) { //instanciei o Scanner no programa principal e instanciei ele aqui como argumento e vou fazer a leitura desta posição neste mesmo Scanner
         try {
             String s = sc.nextLine(); //nossa posição é dada assim: a1 a2 a3
