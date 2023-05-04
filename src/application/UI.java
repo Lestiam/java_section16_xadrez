@@ -52,7 +52,18 @@ public class UI { //User Interface
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " "); //para imprimir o número na frente
             for (int j = 0; j < pieces.length; j++) {
-                printPiece(pieces[i][j]); //imprime a peça
+                printPiece(pieces[i][j], false); //imprime a peça e indica que nenhuma peça é para ter o fundo colorido
+            }
+            System.out.println();
+        }
+        System.out.println("  a b c d e f g h");
+    }
+
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) { //recebe a matriz de peças da minha partida e colore a posição
+        for (int i = 0; i < pieces.length; i++) {
+            System.out.print((8 - i) + " "); //para imprimir o número na frente
+            for (int j = 0; j < pieces.length; j++) {
+                printPiece(pieces[i][j], possibleMoves[i][j]); //quando for para imprimir o tabuleiro, considerando os movimentos possiveis, eu poasso o possibleMoves na posição [i][j] pois aí eu vou pintar o fundo dependendo dessa variavel
             }
             System.out.println();
         }
@@ -60,9 +71,12 @@ public class UI { //User Interface
     }
 
 
-    private static void printPiece(ChessPiece piece) {
+    private static void printPiece(ChessPiece piece, boolean background) { //o boolean backgroud é uma variavel para decidir se eu coloro ou não o fundo da minha peça
+        if (background) { //testo se minha variavel background é verdadeira
+            System.out.print(ANSI_BLUE_BACKGROUND); //se for, eu imprimo o fundo de azul
+        }
         if (piece == null) { //significa que não tinha peça naquela posição do tabuleiro
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         } else {
             if (piece.getColor() == Color.WHITE) { //imprimo a peça branca
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET);

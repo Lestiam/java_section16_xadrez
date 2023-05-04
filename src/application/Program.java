@@ -23,6 +23,10 @@ public class Program {
                 System.out.print("Source: ");
                 ChessPosition source = UI.readChessPosition(sc); //passo o scanner para a posição
 
+                boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+                UI.clearScreen();
+                UI.printBoard(chessMatch.getpieces(), possibleMoves); //sobrecarga do método printBoard que passa os movimentos possíveis. Agora ele tambem vai ser responsável por imprimir o tabuleiro só que colorindo as posições possiveis para onde minha peça pode mover
+                //feito isso, aí sim eu vou pedir para o usuário entrar com a posição de destino
                 System.out.println();
                 System.out.print("Target: ");
                 ChessPosition target = UI.readChessPosition(sc);
