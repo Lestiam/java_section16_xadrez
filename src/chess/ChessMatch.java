@@ -46,6 +46,9 @@ public class ChessMatch {//partida de xadrez, é o coração do sistema de xadre
         if (!board.theIsAPiece(position)) { //neguei o thereIsAPiece, ou seja, se não existir uma peça nesta posição, eu dou uma excessão
             throw  new ChessException("There is no piece on source position"); //a minha ChessException também é uma BoardException
         }
+        if (!board.piece(position).isThereAnyPossibleMove()) { //testo se existe movimentos possíveis para a peça, acesso meu tabuleito.acesso minha peça na posição de origem e a apartir desta posição, eu vou testar se tem algum movimento possível....
+            throw new ChessException("There is no possible moves for the chosen piece");// mas como eu neguei o if eu estou perguntando se não tem nenhum movimento possível e se não tiver, eu lanço uma excessão
+        }
     }
 
     private void placeNewPiece(char column, int row, ChessPiece piece) {//recebe as coordenadas do xadrez

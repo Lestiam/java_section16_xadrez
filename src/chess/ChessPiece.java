@@ -3,7 +3,7 @@ package chess;
 import boardgame.Board;
 import boardgame.Piece;
 
-public class ChessPiece extends Piece { //peças de xadrez
+public abstract class ChessPiece extends Piece { //peças de xadrez, ela se tornou abstrata pois herda da classe Piece, que possui um método abstrato
     private Color color;
 
     public ChessPiece(Board board, Color color) {
