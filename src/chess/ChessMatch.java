@@ -31,6 +31,7 @@ public class ChessMatch {//partida de xadrez, é o coração do sistema de xadre
         Position source = sourcePosition.toPosition(); //primeiro converto estas duas posições para posições da matriz
         Position target = targetPosition.toPosition();
         validateSourcePosition(source); //esta operação é responsável por validar esta posição de origem, caso ela não exista, esta operação vai lancar uma excessão
+        validateTargetPosition(source, target); //agora estou validando a posição de destino
         Piece capturedPiece = makeMove(source, target); //esta variavel recebe o resultado da operação makeMove que realize o movimento da peça
         return (ChessPiece) capturedPiece; //retorno minha peça capturada, fazendo um downcasting para ChessPiece pois a peça capturada é do tipo Piece
     }
@@ -48,6 +49,13 @@ public class ChessMatch {//partida de xadrez, é o coração do sistema de xadre
         }
         if (!board.piece(position).isThereAnyPossibleMove()) { //testo se existe movimentos possíveis para a peça, acesso meu tabuleito.acesso minha peça na posição de origem e a apartir desta posição, eu vou testar se tem algum movimento possível....
             throw new ChessException("There is no possible moves for the chosen piece");// mas como eu neguei o if eu estou perguntando se não tem nenhum movimento possível e se não tiver, eu lanço uma excessão
+        }
+    }
+
+    private void validateTargetPosition(Position source, Position target) { //como eu faço se a posição de destino é um movimento possível em relação a peça de origem?
+        //...Basta testar se essa posição de destino (target) é um movimento possível em relação a peça que estiver na posição de origem (source) (ex: se é o rei na posição origem, testa os movimentos do rei, e assim por diante)
+        if (!board.piece(source).possibleMove(target)) { //se para a peça de origem, a posição de destino NÃO é um movimento possível, significa que eu não posso me mexer para lá
+            throw  new ChessException("The chosen piece can't move to target position");
         }
     }
 

@@ -25,6 +25,11 @@ public class Position { //classe da camada de tabuleiro, representa uma posicao 
         this.column = column;
     }
 
+    public void setValues(int row, int column) { //operação para atualizar os valores de uma posição
+        this.row = row;
+        this.column = column;
+    }
+
     @Override
     public String toString() { //vai imprimir a linha e a coluna
         return  row + ", " + column;
